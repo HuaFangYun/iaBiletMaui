@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="iaBilet.Pos.PaymentPage" Color="Transparent" CanBeDismissedByTappingOutsideOfPopup="False"
+               HorizontalOptions="Center" VerticalOptions="Center">
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="{Binding WindowSize}" WidthRequest="{Binding WindowSize}">
+        <Border Margin="20" Grid.Row="0" StrokeThickness="0.2" BackgroundColor="White" Stroke="#000000" StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="20,20" Radius="40" Opacity="0.5" />
+            </Border.Shadow>
+        </Border>
+        <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,50,0,0" HorizontalTextAlignment="Center" FontSize="Title" FontAttributes="Bold" TextColor="{Binding Color}"></Label>
+        <ActivityIndicator WidthRequest="30" HeightRequest="30" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{StaticResource Primary}" HorizontalOptions="Center" VerticalOptions="Center" />
+        <Label Text="{Binding Message}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0,50,0,0" FontSize="Large" TextColor="{Binding Color}" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+    </Grid>
+</toolkit:Popup>

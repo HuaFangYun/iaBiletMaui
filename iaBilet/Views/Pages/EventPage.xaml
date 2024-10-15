@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="iaBilet.Views.Pages.EventPage" xmlns:strings="clr-namespace:iaBilet.Resources.Strings;assembly=iaBilet.Resources" Title="EventPage">
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid Style="{StaticResource Container}" x:Name="MainContainer" BackgroundColor="Transparent">
+            <Grid>
+                <Border Style="{StaticResource Shadow}" />
+                <VerticalStackLayout Margin="50">
+                    <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image Source="{Binding CartViewModel.Event.imageUrl}" WidthRequest="{OnIdiom 250, Phone=150}" Grid.Row="0"></Image>
+                        <StackLayout Orientation="Vertical" Grid.Column="1" Margin="10,0,0,0">
+                            <Label Text="{Binding CartViewModel.Event.Title}" Style="{StaticResource TitleLabel}" LineHeight="0" Padding="0"></Label>
+                            <Label Text="{Binding CartViewModel.Event.venue}" TextColor="Black" FontSize="Title" TextType="Html"></Label>
+                            <Label Text="{Binding CartViewModel.Event.DisplayDate}" FontSize="Title" FontAutoScalingEnabled="True"></Label>
+                            <Label Text="{Binding CartViewModel.Event.ShortDescription}" TextColor="Black" FontSize="Body" TextType="Html" MaxLines="1000"></Label>
+                        </StackLayout>
+                    </Grid>
+                    <ScrollView Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <StackLayout x:Name="TarriffsList" BindableLayout.ItemsSource="{Binding CartViewModel.Tarriffs}" VerticalOptions="StartAndExpand">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout>
+                                        <Grid ColumnDefinitions="*,Auto,Auto">
+                                            <Label Text="{Binding displayName}" Style="{StaticResource SubTitleLabel}" Grid.Column="0" ></Label>
+                                            <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Style="{StaticResource SubTitleLabel}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding price}"></Span>
+                                                        <Span Text=" "></Span>
+                                                        <Span Text="{Binding CurrencyName}"></Span>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <StackLayout Orientation="Horizontal" Grid.Column="2" Margin="10,0,5,0">
+                                                <Button Command="{Binding Source={x:Reference TarriffsList}, Path=BindingContext.CartViewModel.DecrementCommand}" CommandParameter="{Binding .}" Style="{StaticResource SpinnerButton}" Text="-"></Button>
+                                                <Entry Text="{Binding Quantity}" Style="{StaticResource SpinnerEntry}" IsReadOnly="True"></Entry>
+                                                <Button Command="{Binding Source={x:Reference TarriffsList}, Path=BindingContext.CartViewModel.IncrementCommand}" CommandParameter="{Binding .}" Style="{StaticResource SpinnerButton}" Text="+"></Button>
+                                            </StackLayout>
+                                        </Grid>
+                                        <BoxView Style="{StaticResource SeparatorLine}" />
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                    <Grid ColumnDefinitions="*, *" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="50">
+                        <Button Grid.Column="0" Text="{x:Static strings:AppResources.Close}" VerticalOptions="Center" HorizontalOptions="End"  Command="{Binding CloseEventViewCommand}" BackgroundColor="{StaticResource Danger}" WidthRequest="200"></Button>
+                        <Button Grid.Column="1" Text="Continue" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Command="{Binding Source={x:Reference TarriffsList}, Path=BindingContext.CartViewModel.LockSeatsCommand}" WidthRequest="200"></Button>
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

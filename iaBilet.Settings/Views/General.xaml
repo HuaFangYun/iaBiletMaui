@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="iaBilet.Settings.Views.General" xmlns:strings="clr-namespace:iaBilet.Resources.Strings;assembly=iaBilet.Resources"
+             Title="General">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../Resources/Styles.xaml"></ResourceDictionary>
+        
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+       
+        <StackLayout  Style="{StaticResource SettingsFormRow}">
+            <Label Text="{x:Static strings:AppResources.BackendBaseUrl}" Style="{StaticResource SettingsFormLabel}"/>
+            <Entry Text="{Binding ApiBaseUrl, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="Key" Style="{StaticResource SettingsFormLabel}"/>
+            <Entry Text="{Binding Key, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="Secret" Style="{StaticResource SettingsFormLabel}" />
+            <Entry Text="{Binding Secret, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:strings="clr-namespace:iaBilet.Resources.Strings;assembly=iaBilet.Resources" x:Class="iaBilet.Views.Controls.Finalize">
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid Style="{StaticResource Container}">
+            <Border Style="{StaticResource Shadow}" />
+            <VerticalStackLayout Margin="50">
+                <Label Text="Comanda mea" Style="{StaticResource TitleLabel}"></Label>
+                <BoxView Style="{StaticResource SeparatorLine}" />
+                <Grid ColumnDefinitions="150, *" Margin="0,20,0,20">
+                    <Image Source="{Binding CartViewModel.Event.imageUrl}" Grid.Column="0" HorizontalOptions="Fill" />
+                    <VerticalStackLayout Grid.Column="1" Margin="20,0,0,0">
+                        <Label Text="{Binding CartViewModel.Event.Title}" Style="{StaticResource TitleLabel}"></Label>
+                        <Label Text="{Binding CartViewModel.Event.venue}" FontSize="25" FontAutoScalingEnabled="True"></Label>
+                        <Label Text="{Binding CartViewModel.Event.DisplayDate}" FontSize="Title" FontAutoScalingEnabled="True"></Label>
+                    </VerticalStackLayout>
+                </Grid>
+                <BoxView Style="{StaticResource SeparatorLine}" />
+                <StackLayout x:Name="TicketList" BindableLayout.ItemsSource="{Binding CartViewModel.CartItems}" VerticalOptions="StartAndExpand">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Grid ColumnDefinitions="*, *" HorizontalOptions="FillAndExpand">
+                                    <Label Grid.Column="0" HorizontalOptions="Start" Style="{StaticResource SubTitleLabel}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Quantity}"></Span>
+                                                <Span Text=" x "></Span>
+                                                <Span Text="{Binding Name}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Style="{StaticResource SubTitleLabel}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Quantity}"></Span>
+                                                <Span Text=" x "></Span>
+                                                <Span Text="{Binding Price}"></Span>
+                                                <Span Text=" = "></Span>
+                                                <Span Text="{Binding Total}"></Span>
+                                                <Span Text=" "></Span>
+                                                <Span Text="{Binding CurrencyName}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                <BoxView Style="{StaticResource SeparatorLine}" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <StackLayout x:Name="ModifierList" BindableLayout.ItemsSource="{Binding CartViewModel.PriceModifiers}" VerticalOptions="StartAndExpand">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Grid ColumnDefinitions="*, *" HorizontalOptions="FillAndExpand">
+                                    <Label Grid.Column="0" HorizontalOptions="Start" Style="{StaticResource SubTitleLabel}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Label}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" Style="{StaticResource SubTitleLabel}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Value}"></Span>
+                                                <Span Text=" "></Span>
+                                                <Span Text="{Binding CurrencyName}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                <BoxView Style="{StaticResource SeparatorLine}" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <BoxView Style="{StaticResource SeparatorLine}" />
+                <Grid ColumnDefinitions="*, *" HorizontalOptions="FillAndExpand">
+                    <Label Grid.Column="0" Text="Total" HorizontalOptions="Start" Style="{StaticResource SubTitleLabel}" FontAttributes="Bold"></Label>
+                    <Label Grid.Column="1" Text="{Binding CartViewModel.Total}" HorizontalOptions="EndAndExpand" Style="{StaticResource SubTitleLabel}" FontAttributes="Bold"></Label>
+                </Grid>
+                <BoxView Style="{StaticResource SeparatorLine}" />
+                <Grid ColumnDefinitions="*, *" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="50">
+                    <Button Grid.Column="0" Text="{x:Static strings:AppResources.Close}" VerticalOptions="Center" HorizontalOptions="End" Margin="10" Command="{Binding CloseFinalizeViewCommand}" BackgroundColor="{StaticResource Danger}" WidthRequest="200"></Button>
+                    <Button Grid.Column="1" Text="{x:Static strings:AppResources.Pay}" VerticalOptions="Center" HorizontalOptions="Start" Margin="10" Command="{Binding CartViewModel.PayBookingCommand}" BackgroundColor="{StaticResource Success}" WidthRequest="200"></Button>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>

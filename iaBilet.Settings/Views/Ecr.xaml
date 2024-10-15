@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="iaBilet.Settings.Views.Ecr" xmlns:strings="clr-namespace:iaBilet.Resources.Strings;assembly=iaBilet.Resources" Title="Ecr">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../Resources/Styles.xaml"></ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <VerticalStackLayout IsEnabled="{Binding EcrIsActive}">
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="{x:Static strings:AppResources.Model}" Style="{StaticResource SettingsFormLabel}" />
+            <Picker ItemsSource="{Binding AvailableEcrModels}" ItemDisplayBinding="{Binding Name, Mode=TwoWay}" SelectedItem="{Binding EcrModel}" Style="{StaticResource SettingsFormPicker}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="{x:Static strings:AppResources.ConnectivityType}" Style="{StaticResource SettingsFormLabel}" />
+            <Picker ItemsSource="{Binding EcrAvailableConnectivityTypes}"  SelectedItem="{Binding EcrConnectivityType, Mode=TwoWay}" Style="{StaticResource SettingsFormPicker}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" IsVisible="{Binding IsEcrSerialDevice}">
+            <Label Text="{x:Static strings:AppResources.Port}" Style="{StaticResource SettingsFormLabel}" />
+            <Picker ItemsSource="{Binding AvailablePorts}" Style="{StaticResource SettingsFormPicker}" SelectedItem="{Binding SelectedPortName, Mode=TwoWay}" />
+        </StackLayout>
+
+        <StackLayout Style="{StaticResource SettingsFormRow}" IsVisible="{Binding IsEcrBluetoothDevice}">
+            <Label Text="{x:Static strings:AppResources.BluetoothAdress}" Style="{StaticResource SettingsFormLabel}" />
+            <StackLayout Orientation="Horizontal">
+            <Entry Text="{Binding EcrBluetoothAddress, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+            <Button Text="{x:Static strings:AppResources.SearchDevices}"  Clicked="ScanButton_Clicked" CommandParameter="{Binding}" Margin="10,0,0,0" HeightRequest="40"></Button>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="{x:Static strings:AppResources.BaudRate}" Style="{StaticResource SettingsFormLabel}" />
+            <Entry Text="{Binding EcrBaudRate, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" Orientation="Horizontal">
+            <Label Text="{x:Static strings:AppResources.ConnectAtStartUp}" Style="{StaticResource SettingsFormLabel}" />
+            <CheckBox IsChecked="{Binding EcrConnectAtStartUp, Mode=TwoWay}"></CheckBox>
+        </StackLayout>
+    </VerticalStackLayout>
+    <StackLayout Style="{StaticResource SettingsFormRow}" Orientation="Horizontal">
+        <Label Text="{x:Static strings:AppResources.Active}" Style="{StaticResource SettingsFormLabel}" />
+        <CheckBox IsChecked="{Binding EcrIsActive, Mode=TwoWay}"></CheckBox>
+    </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

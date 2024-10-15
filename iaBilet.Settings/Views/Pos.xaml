@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="iaBilet.Settings.Views.Pos" 
+             xmlns:strings="clr-namespace:iaBilet.Resources.Strings;assembly=iaBilet.Resources"
+             Title="Pos">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../Resources/Styles.xaml"></ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <VerticalStackLayout IsEnabled="{Binding PosIsActive}">
+        
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="{x:Static strings:AppResources.Model}" Style="{StaticResource SettingsFormLabel}" />
+            <Picker ItemsSource="{Binding AvailableBankPosModels}" ItemDisplayBinding="{Binding Name, Mode=TwoWay}" SelectedItem="{Binding BankPosModel}" Style="{StaticResource SettingsFormPicker}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}">
+            <Label Text="{x:Static strings:AppResources.ConnectivityType}" Style="{StaticResource SettingsFormLabel}" />
+            <Picker ItemsSource="{Binding PosAvailableConnectivityTypes}" SelectedItem="{Binding PosConnectivityType, Mode=TwoWay}" Style="{StaticResource SettingsFormPicker}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" IsVisible="{Binding IsPosSerialDevice}">
+            <Label Text="{x:Static strings:AppResources.Port}" Style="{StaticResource SettingsFormLabel}" />
+            <Picker ItemsSource="{Binding AvailablePorts}" Style="{StaticResource SettingsFormPicker}" SelectedItem="{Binding PosSelectedPortName, Mode=TwoWay}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" IsVisible="{Binding IsPosNetworkDevice}">
+            <Label Text="{x:Static strings:AppResources.HostIP}" Style="{StaticResource SettingsFormLabel}" />
+            <Entry Text="{Binding BankPosHost, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" IsVisible="{Binding IsPosNetworkDevice}">
+            <Label Text="{x:Static strings:AppResources.Port}" Style="{StaticResource SettingsFormLabel}" />
+            <Entry Text="{Binding BankPosTcpPort, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" IsVisible="{Binding PosAskForBoudRate}">
+            <Label Text="{x:Static strings:AppResources.BaudRate}" Style="{StaticResource SettingsFormLabel}" />
+            <Entry Text="{Binding BankPosBaudRate, Mode=TwoWay}" Style="{StaticResource SettingsFormEntry}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource SettingsFormRow}" >
+            <Button x:Name="TestPayment" Text="Test Payment" Clicked="TestPayment_Clicked"  Margin="10,0,0,0" HeightRequest="40"></Button>
+        </StackLayout>
+    </VerticalStackLayout>
+    <StackLayout Style="{StaticResource SettingsFormRow}" Orientation="Horizontal">
+            <Label Text="{x:Static strings:AppResources.Active}" Style="{StaticResource SettingsFormLabel}" />
+            <CheckBox IsChecked="{Binding PosIsActive, Mode=TwoWay}"></CheckBox>
+    </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
